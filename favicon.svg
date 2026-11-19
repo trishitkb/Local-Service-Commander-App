@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1319" />
+      <stop offset="100%" stop-color="#141e28" />
+    </linearGradient>
+  </defs>
+  <!-- Rounded Base Squircle -->
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="url(#bgGrad)" stroke="#1c2b38" stroke-width="2.5" />
+  <!-- Terminal Chevron > -->
+  <path d="M34 36 L68 64 L34 92" fill="none" stroke="#00e5ff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Status Radar Ring -->
+  <circle cx="92" cy="80" r="15" fill="none" stroke="#22c55e" stroke-width="2.5" opacity="0.35" />
+  <!-- Service Active Pulse Node ● -->
+  <circle cx="92" cy="80" r="9.5" fill="#22c55e" />
+</svg>

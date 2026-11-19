@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local Service Commander — Official Windows Documentation & Releases</title>
+  <meta name="description" content="Local Service Commander is an offline, real-time developer service and process management console for Windows." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       Official Enterprise / Developer Documentation Theme
+       Clean, sober, high-contrast, information-dense
+       ═══════════════════════════════════════════════════════════════ */
+    :root {
+      --bg-page: #ffffff;
+      --bg-subtle: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-header: #ffffff;
+      --bg-code: #f1f5f9;
+      --bg-badge: #e2e8f0;
+
+      --text-main: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --text-link: #1d4ed8;
+      --text-link-hover: #1e40af;
+
+      --border-subtle: #f1f5f9;
+      --border-color: #e2e8f0;
+      --border-strong: #cbd5e1;
+
+      --accent-primary: #1e40af;       /* Slate Blue */
+      --accent-primary-hover: #1d4ed8;
+      --accent-green: #15803d;         /* Forest Green */
+      --accent-green-bg: #dcfce7;
+      --accent-green-border: #86efac;
+      --accent-amber: #b45309;
+      --accent-amber-bg: #fef3c7;
+      --accent-red: #b91c1c;
+      --accent-red-bg: #fee2e2;
+
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      --radius-sm: 2px;
+      --radius-md: 4px;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      width: 100%;
+      height: 100%;
+      zoom: 1.25;
+    }
+
+    body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-page);
+      color: var(--text-body);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--text-link);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--text-link-hover);
+      text-decoration: underline;
+    }
+
+    code, kbd, samp, pre {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+    }
+
+    /* ── HEADER NAVBAR ── */
+    .site-header {
+      background: var(--bg-header);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+
+    .brand-title:hover {
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 1px 6px;
+      background: var(--bg-code);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-item a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-body);
+      transition: color 0.1s ease;
+    }
+
+    .nav-item a:hover {
+      color: var(--accent-primary);
+      text-decoration: none;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-header-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffffff;
+      background: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.1s ease;
+    }
+
+    .btn-header-dl:hover {
+      background: var(--accent-primary-hover);
+      text-decoration: none;
+    }
+
+    .btn-header-coffee {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+      background: #ffffff;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background-color 0.1s ease, border-color 0.1s ease;
+    }
+
+    .btn-header-coffee:hover {
+      background: #fffbeb;
+      border-color: #fde68a;
+      color: #92400e;
+      text-decoration: none;
+    }
+
+    .btn-header-gh {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+      background: #ffffff;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background-color 0.1s ease, border-color 0.1s ease;
+    }
+
+    .btn-header-gh:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      color: #0f172a;
+      text-decoration: none;
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── COMPACT HERO ── */
+    .hero-section {
+      padding: 36px 0 28px;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .hero-headline {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero-description {
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      max-width: 680px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #ffffff;
+      background: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-primary-hover);
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+      background: #ffffff;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-subtle);
+      border-color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .hero-meta-strip {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-tag strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Hero Quick Spec Box */
+    .hero-spec-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .spec-card-title {
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+      color: var(--text-main);
+      text-transform: uppercase;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      font-size: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .spec-row:last-child {
+      border-bottom: none;
+    }
+
+    .spec-key {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .spec-val {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* ── LIVE INTERFACE MOCKUP (CLEAN LIGHT THEME) ── */
+    .preview-section {
+      padding: 32px 0 36px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-head {
+      margin-bottom: 18px;
+    }
+
+    .section-kicker {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .preview-window {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .window-titlebar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    .titlebar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .titlebar-stats {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 11px;
+    }
+
+    .stat-pill {
+      color: var(--text-body);
+    }
+
+    .stat-pill strong {
+      color: var(--accent-green);
+    }
+
+    .window-body {
+      display: grid;
+      grid-template-columns: 190px 1fr 310px;
+      min-height: 380px;
+    }
+
+    /* Left Sidebar */
+    .win-sidebar {
+      background: #ffffff;
+      border-right: 1px solid var(--border-color);
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .win-sb-group-title {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 0 8px 4px;
+    }
+
+    .win-sb-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .win-sb-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 8px;
+      font-size: 12px;
+      color: var(--text-body);
+      border-radius: var(--radius-sm);
+      cursor: default;
+    }
+
+    .win-sb-item.active {
+      background: var(--bg-code);
+      color: var(--accent-primary);
+      font-weight: 600;
+    }
+
+    .win-sb-count {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 1px 5px;
+      background: var(--bg-badge);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+    }
+
+    /* Center Table */
+    .win-table-area {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      overflow-x: auto;
+    }
+
+    .win-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 12px;
+    }
+
+    .toolbar-filter {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      background: #ffffff;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      width: 220px;
+    }
+
+    .dense-table {
+      width: 100%;
+      min-width: 580px;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    .dense-table th {
+      background: #ffffff;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .dense-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-body);
+      white-space: nowrap;
+    }
+
+    .dense-table tr:hover {
+      background: var(--bg-subtle);
+    }
+
+    .dense-table tr.selected {
+      background: #eff6ff;
+      border-left: 3px solid var(--accent-primary);
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .status-dot.active {
+      background: var(--accent-green);
+    }
+
+    .status-dot.stopped {
+      background: var(--text-muted);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 1px 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+    }
+
+    .badge-node {
+      background: #e0f2fe;
+      color: #0369a1;
+      border-color: #7dd3fc;
+    }
+
+    .badge-sql {
+      background: #dbeafe;
+      color: #1d4ed8;
+      border-color: #93c5fd;
+    }
+
+    .badge-cache {
+      background: #ede9fe;
+      color: #6d28d9;
+      border-color: #c4b5fd;
+    }
+
+    .badge-port {
+      background: var(--bg-code);
+      color: var(--text-main);
+      border-color: var(--border-color);
+      font-family: var(--font-mono);
+    }
+
+    /* Right Inspector */
+    .win-inspector {
+      background: var(--bg-subtle);
+      border-left: 1px solid var(--border-color);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .insp-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    .insp-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .insp-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .insp-btn {
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: #ffffff;
+      color: var(--text-main);
+      cursor: default;
+    }
+
+    .insp-btn.stop {
+      color: var(--accent-amber);
+      background: var(--accent-amber-bg);
+      border-color: #fde68a;
+    }
+
+    .insp-btn.kill {
+      color: var(--accent-red);
+      background: var(--accent-red-bg);
+      border-color: #fecaca;
+    }
+
+    .insp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .insp-metric-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .insp-metric-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .insp-metric-val {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    .insp-code-block {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-body);
+      word-break: break-all;
+    }
+
+    /* ── DENSE 3-COL FEATURE SECTION ── */
+    .features-section {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+    }
+
+    .feature-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .feature-number {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 6px;
+    }
+
+    .feature-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .feature-card-body {
+      font-size: 13px;
+      color: var(--text-body);
+      line-height: 1.55;
+    }
+
+    /* ── SERVICES SPECIFICATION TABLE ── */
+    .specs-section {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+    }
+
+    .specs-table-wrapper {
+      margin-top: 18px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      overflow-x: auto;
+    }
+
+    .specs-table {
+      width: 100%;
+      min-width: 580px;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .specs-table th {
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+    }
+
+    .specs-table th:last-child {
+      border-right: none;
+    }
+
+    .specs-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+      color: var(--text-body);
+      font-size: 12.5px;
+    }
+
+    .specs-table td:last-child {
+      border-right: none;
+    }
+
+    .specs-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .specs-table tr:hover {
+      background: #fafafa;
+    }
+
+    /* ── ARCHITECTURE SECTION ── */
+    .arch-section {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .arch-box {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      background: #ffffff;
+    }
+
+    .arch-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .arch-diagram {
+      background: var(--bg-code);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: var(--text-main);
+      margin: 10px 0;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .arch-list {
+      list-style-type: disc;
+      padding-left: 20px;
+      font-size: 13px;
+      color: var(--text-body);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* ── DOWNLOAD & RELEASES TABLE ── */
+    .download-section {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+    }
+
+    .dl-table-wrapper {
+      margin-top: 18px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      overflow-x: auto;
+    }
+
+    .btn-dl-table {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffffff;
+      background: var(--accent-primary);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+    }
+
+    .btn-dl-table:hover {
+      background: var(--accent-primary-hover);
+      text-decoration: none;
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: #ffffff;
+      padding: 28px 0;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+    }
+
+    .footer-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* ── RESPONSIVE & MOBILE-FRIENDLY (CALIBRATED FOR 1.25x ZOOM) ── */
+    @media (max-width: 1040px) {
+      .nav-menu {
+        display: none;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .window-body {
+        grid-template-columns: 1fr;
+      }
+      .win-sidebar, .win-inspector {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+      .header-inner {
+        padding: 0 16px;
+      }
+      .hero-section {
+        padding: 24px 0 20px;
+      }
+      .hero-headline {
+        font-size: 24px;
+      }
+      .hero-description {
+        font-size: 14px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      html {
+        /* Preserve natural viewport width on narrow mobile phones (320px–430px) so content is never compressed or clipped */
+        zoom: 1;
+      }
+      body {
+        font-size: 14px;
+      }
+      .header-actions {
+        gap: 6px;
+      }
+      .btn-header-coffee {
+        padding: 5px 8px;
+        font-size: 11px;
+      }
+      .btn-header-dl {
+        padding: 5px 10px;
+        font-size: 11px;
+      }
+      .brand-title {
+        font-size: 13.5px;
+      }
+      .brand-badge {
+        display: none;
+      }
+      .hero-cta-row a {
+        width: 100%;
+        justify-content: center;
+      }
+      .hero-meta-strip {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── SITE NAVIGATION HEADER ── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <img src="favicon.svg" alt="Local Service Commander Icon" width="22" height="22" style="border-radius: 4px; display: inline-block; vertical-align: middle;" />
+        <a href="#overview" class="brand-title">Local Service Commander</a>
+        <span class="brand-badge">v0.1.0</span>
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="#overview">Overview</a></li>
+        <li class="nav-item"><a href="#features">Features</a></li>
+        <li class="nav-item"><a href="#services">Supported Services</a></li>
+        <li class="nav-item"><a href="#architecture">Architecture</a></li>
+        <li class="nav-item"><a href="#downloads">Downloads</a></li>
+      </ul>
+      <div class="header-actions">
+        <a href="https://github.com/trishitkb/Local-Service-Commander-App" target="_blank" rel="noopener noreferrer" class="btn-header-gh" title="View on GitHub">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://buymeacoffee.com/trishitkb" target="_blank" rel="noopener noreferrer" class="btn-header-coffee" title="Support development on Buy Me a Coffee">☕ Buy Me a Coffee</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── HERO SECTION ── -->
+  <section class="hero-section" id="overview">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-kicker">Windows System Utility &middot; Offline-First</div>
+          <h1 class="hero-headline">Local-first service and process control center for Windows.</h1>
+          <p class="hero-description">
+            Local Service Commander detects installed databases, development runtimes, web servers, and background daemons running on the machine. It provides a centralized dashboard for real-time telemetry, port conflict resolution, guarded process termination, and custom stack orchestration without requiring an IDE or terminal.
+          </p>
+          <div class="hero-cta-row">
+            <a href="#downloads" class="btn-primary">Download Installer</a>
+            <a href="https://github.com/trishitkb/Local-Service-Commander-App" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="gap: 6px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="#architecture" class="btn-secondary">Technical Specifications</a>
+            <a href="https://buymeacoffee.com/trishitkb" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="gap: 6px;">☕ Buy Me a Coffee</a>
+          </div>
+          <div class="hero-meta-strip">
+            <span class="meta-tag">Target: <strong>Windows 10/11 x64</strong></span>
+            <span class="meta-tag">License: <strong>Free for Commercial & Personal Use</strong></span>
+            <span class="meta-tag">Cloud: <strong>100% Offline (Zero Telemetry)</strong></span>
+          </div>
+        </div>
+
+        <!-- Quick Spec Card -->
+        <div class="hero-spec-card">
+          <div class="spec-card-title">System & Release Profile</div>
+          <div class="spec-row">
+            <span class="spec-key">Current Version</span>
+            <span class="spec-val">0.1.0</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Release Architecture</span>
+            <span class="spec-val">Windows x64 (MSVC)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Desktop Host</span>
+            <span class="spec-val">Tauri 2 (Native WebView2)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Installer Format</span>
+            <span class="spec-val">NSIS Installer + MSI Package</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Bundle Size</span>
+            <span class="spec-val">~12 MB Installed</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Node.js Requirement</span>
+            <span class="spec-val">None (Bundled Sidecar)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Network Policy</span>
+            <span class="spec-val">Bound to 127.0.0.1 Only</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PREVIEW SECTION ── -->
+  <section class="preview-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker">User Interface</div>
+        <div class="section-title">Dense, Structured Dashboard Layout</div>
+        <div class="section-desc">Designed for continuous developer workflow monitoring with high contrast, exact resource metrics, and zero placeholder data.</div>
+      </div>
+
+      <div class="preview-window">
+        <!-- Titlebar -->
+        <div class="window-titlebar">
+          <div class="titlebar-left">
+            <img src="favicon.svg" alt="" width="14" height="14" style="border-radius: 2px; vertical-align: middle;" />
+            <span>Commander &mdash; Local Service Controller (x64)</span>
+          </div>
+          <div class="titlebar-stats">
+            <span class="stat-pill">RUNNING: <strong>4</strong></span>
+            <span class="stat-pill">STOPPED: <strong>1</strong></span>
+            <span class="stat-pill">PORTS: <strong>:6379, :5173, :3306, :4174</strong></span>
+            <span>UPTIME: 18h 24m</span>
+          </div>
+        </div>
+
+        <!-- Dashboard Body Mockup -->
+        <div class="window-body">
+          <!-- Sidebar -->
+          <div class="win-sidebar">
+            <div>
+              <div class="win-sb-group-title">SERVICES</div>
+              <ul class="win-sb-nav">
+                <li class="win-sb-item active">
+                  <span>All Daemons</span>
+                  <span class="win-sb-count">5</span>
+                </li>
+                <li class="win-sb-item">
+                  <span>Databases</span>
+                  <span class="win-sb-count">2</span>
+                </li>
+                <li class="win-sb-item">
+                  <span>Web &amp; API</span>
+                  <span class="win-sb-count">1</span>
+                </li>
+                <li class="win-sb-item">
+                  <span>Containers</span>
+                  <span class="win-sb-count">1</span>
+                </li>
+                <li class="win-sb-item">
+                  <span>System Services</span>
+                  <span class="win-sb-count">1</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div class="win-sb-group-title">OBSERVABILITY</div>
+              <ul class="win-sb-nav">
+                <li class="win-sb-item"><span>Process Monitor</span></li>
+                <li class="win-sb-item"><span>Port Matrix &amp; IPC</span></li>
+                <li class="win-sb-item"><span>Log Streams</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Main Table -->
+          <div class="win-table-area">
+            <div class="win-toolbar">
+              <input type="text" class="toolbar-filter" value="Filter by service, PID, or port..." readonly />
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">
+                AUTO-REFRESH: <strong>1000ms</strong>
+              </div>
+            </div>
+
+            <table class="dense-table">
+              <thead>
+                <tr>
+                  <th style="width: 24px;">ST</th>
+                  <th>SERVICE NAME</th>
+                  <th>CATEGORY</th>
+                  <th>PID</th>
+                  <th>BIND PORT</th>
+                  <th>CPU %</th>
+                  <th>RESIDENT RAM</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="selected">
+                  <td><span class="status-dot active"></span></td>
+                  <td><strong>Redis</strong></td>
+                  <td><span class="badge badge-cache">CACHE</span></td>
+                  <td><code>7688</code></td>
+                  <td><span class="badge badge-port">:6379</span></td>
+                  <td><code>0.00%</code></td>
+                  <td><code>1.0 MB</code></td>
+                </tr>
+                <tr>
+                  <td><span class="status-dot active"></span></td>
+                  <td><strong>Vite Development Server</strong></td>
+                  <td><span class="badge badge-node">NODE</span></td>
+                  <td><code>24116</code></td>
+                  <td><span class="badge badge-port">:5173</span></td>
+                  <td><code>0.00%</code></td>
+                  <td><code>43.3 MB</code></td>
+                </tr>
+                <tr>
+                  <td><span class="status-dot active"></span></td>
+                  <td><strong>MariaDB</strong></td>
+                  <td><span class="badge badge-sql">DATABASE</span></td>
+                  <td><code>6736</code></td>
+                  <td><span class="badge badge-port">:3306</span></td>
+                  <td><code>0.00%</code></td>
+                  <td><code>1.2 MB</code></td>
+                </tr>
+                <tr>
+                  <td><span class="status-dot active"></span></td>
+                  <td><strong>Commander Local API</strong></td>
+                  <td><span class="badge badge-node">DAEMON</span></td>
+                  <td><code>25192</code></td>
+                  <td><span class="badge badge-port">:4174</span></td>
+                  <td><code>0.02%</code></td>
+                  <td><code>18.4 MB</code></td>
+                </tr>
+                <tr style="opacity: 0.65;">
+                  <td><span class="status-dot stopped"></span></td>
+                  <td><strong>Docker Desktop Service</strong></td>
+                  <td><span class="badge" style="background:#f1f5f9; color:#475569; border-color:#cbd5e1;">CONTAINER</span></td>
+                  <td><code>&mdash;</code></td>
+                  <td><code>&mdash;</code></td>
+                  <td><code>&mdash;</code></td>
+                  <td><code>&mdash;</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Inspector -->
+          <div class="win-inspector">
+            <div class="insp-header">
+              <div class="insp-name">Redis (Active)</div>
+              <div class="insp-actions">
+                <span class="insp-btn stop">Stop</span>
+                <span class="insp-btn">Restart</span>
+                <span class="insp-btn kill">Kill</span>
+              </div>
+            </div>
+
+            <div class="insp-grid">
+              <div class="insp-metric-card">
+                <div class="insp-metric-label">PROCESS PID</div>
+                <div class="insp-metric-val">7688</div>
+              </div>
+              <div class="insp-metric-card">
+                <div class="insp-metric-label">CPU UTIL</div>
+                <div class="insp-metric-val">0.00%</div>
+              </div>
+              <div class="insp-metric-card">
+                <div class="insp-metric-label">RESIDENT RAM</div>
+                <div class="insp-metric-val">1.0 MB</div>
+              </div>
+              <div class="insp-metric-card">
+                <div class="insp-metric-label">ACTIVE THREADS</div>
+                <div class="insp-metric-val">4</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="insp-metric-label" style="margin-bottom: 4px;">EXECUTABLE BINARY</div>
+              <div class="insp-code-block">C:\Program Files\Redis\redis-server.exe</div>
+            </div>
+
+            <div>
+              <div class="insp-metric-label" style="margin-bottom: 4px;">SOCKET TELEMETRY</div>
+              <div class="insp-code-block">TCP 127.0.0.1:6379 &middot; LISTEN (3 connections)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DENSE 6-CARD FEATURES SECTION ── -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker">Core System Architecture</div>
+        <div class="section-title">Engineered for Reliability, Safety &amp; Speed</div>
+        <div class="section-desc">Zero simulated data. Every metric and socket binding reflects actual Windows OS kernel and network states.</div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-number">01 / DISCOVERY</div>
+          <h3 class="feature-card-title">Automated Detection Engine</h3>
+          <p class="feature-card-body">
+            Continuously queries Windows management instrumentation (WMI) and active process tables to identify PostgreSQL, MySQL, Redis, Docker, Node.js, Python, Java, and .NET daemons with zero manual configuration.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-number">02 / TELEMETRY</div>
+          <h3 class="feature-card-title">Kernel-Level Resource Metrics</h3>
+          <p class="feature-card-body">
+            Accurate CPU utilization percentages, resident working set memory (RAM), thread counters, and process identifiers (PID) refreshed continuously via high-efficiency Windows system calls.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-number">03 / SAFETY</div>
+          <h3 class="feature-card-title">Protected-Process Guards</h3>
+          <p class="feature-card-body">
+            Explicit confirmation modals protect against accidental service interruption. System-critical binaries (LSASS, CSRSS, SMSS, WinInit) and low PID allocations are blocked from termination.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-number">04 / CUSTOMIZATION</div>
+          <h3 class="feature-card-title">Custom Process Registry</h3>
+          <p class="feature-card-body">
+            Register project-specific start/stop scripts (e.g., <code>npm run dev</code> or <code>cargo run</code>) directly in Commander. Definitions persist in <code>%APPDATA%</code> across reboots and closures.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-number">05 / ORCHESTRATION</div>
+          <h3 class="feature-card-title">Multi-Process Collections</h3>
+          <p class="feature-card-body">
+            Group dependent services (e.g., Database + API Server + Frontend Dev Server) into named Collections. Launch or terminate an entire development environment with a single action.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-number">06 / NETWORKING</div>
+          <h3 class="feature-card-title">TCP Port Matrix &amp; IPC Inspector</h3>
+          <p class="feature-card-body">
+            Comprehensive table of all active listening sockets on the host machine. Identifies owning PIDs, bound IP addresses, socket states (LISTEN / ESTABLISHED), and active client connection counts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES SPECIFICATION TABLE ── -->
+  <section class="specs-section" id="services">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker">Detection Matrix</div>
+        <div class="section-title">Supported Development Stacks</div>
+        <div class="section-desc">Automated classification profiles for databases, runtimes, containers, and web daemons.</div>
+      </div>
+
+      <div class="specs-table-wrapper">
+        <table class="specs-table">
+          <thead>
+            <tr>
+              <th>CATEGORY</th>
+              <th>TECHNOLOGY</th>
+              <th>DETECTION SIGNATURE</th>
+              <th>DEFAULT PORTS</th>
+              <th>EXECUTION STRATEGY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Database</strong></td>
+              <td>PostgreSQL</td>
+              <td><code>postgres.exe</code>, Windows Service, pg_ctl</td>
+              <td><code>5432</code></td>
+              <td>Native Process / Windows Service</td>
+            </tr>
+            <tr>
+              <td><strong>Database</strong></td>
+              <td>MySQL / MariaDB</td>
+              <td><code>mysqld.exe</code>, <code>mariadbd.exe</code></td>
+              <td><code>3306</code></td>
+              <td>Native Process / Windows Service</td>
+            </tr>
+            <tr>
+              <td><strong>In-Memory Cache</strong></td>
+              <td>Redis</td>
+              <td><code>redis-server.exe</code>, Memurai service</td>
+              <td><code>6379</code></td>
+              <td>Native Process / WSL2 Bridge</td>
+            </tr>
+            <tr>
+              <td><strong>Document Store</strong></td>
+              <td>MongoDB</td>
+              <td><code>mongod.exe</code></td>
+              <td><code>27017</code></td>
+              <td>Native Process / Windows Service</td>
+            </tr>
+            <tr>
+              <td><strong>Containers</strong></td>
+              <td>Docker Engine</td>
+              <td><code>dockerd.exe</code>, Docker Desktop daemon</td>
+              <td><code>2375</code>, Named Pipe</td>
+              <td>Windows Subsystem / Native CLI</td>
+            </tr>
+            <tr>
+              <td><strong>Web &amp; API</strong></td>
+              <td>Node.js / Vite / Next.js</td>
+              <td><code>node.exe</code> with script/cli arguments</td>
+              <td><code>3000, 5173, 8080</code></td>
+              <td>Process Tree / Child Process Spawner</td>
+            </tr>
+            <tr>
+              <td><strong>Web &amp; API</strong></td>
+              <td>Python (FastAPI, Django, Flask)</td>
+              <td><code>python.exe</code>, <code>uvicorn</code>, <code>gunicorn</code></td>
+              <td><code>8000, 5000</code></td>
+              <td>Process Tree / Virtualenv Scanner</td>
+            </tr>
+            <tr>
+              <td><strong>Enterprise Runtime</strong></td>
+              <td>Java / Spring Boot</td>
+              <td><code>java.exe</code>, <code>javaw.exe</code> with JAR args</td>
+              <td><code>8080, 8443</code></td>
+              <td>JVM Process &amp; JMX Metadata</td>
+            </tr>
+            <tr>
+              <td><strong>Web Server</strong></td>
+              <td>Nginx / Apache</td>
+              <td><code>nginx.exe</code>, <code>httpd.exe</code></td>
+              <td><code>80, 443</code></td>
+              <td>Native Daemon Controller</td>
+            </tr>
+            <tr>
+              <td><strong>Custom</strong></td>
+              <td>User-Defined Executables</td>
+              <td>Configured executable binary + working dir</td>
+              <td>User Defined</td>
+              <td>Direct OS <code>child_process.spawn</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ARCHITECTURE SECTION ── -->
+  <section class="arch-section" id="architecture">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker">System Architecture</div>
+        <div class="section-title">Three-Tier Decoupled Architecture</div>
+        <div class="section-desc">Engineered for security, high responsiveness, and zero external runtime dependencies.</div>
+      </div>
+
+      <div class="arch-grid">
+        <div class="arch-box">
+          <div class="arch-title">Data Flow &amp; Process Boundary</div>
+          <div class="arch-diagram">
++----------------------------------------------------+
+|  Tauri 2 Native Host (Rust x64)                    |
+|  WebView2 UI Context (React 19 + TypeScript)       |
++----------------------------------------------------+
+                         |
+           HTTP REST / 127.0.0.1:4174
+                         v
++----------------------------------------------------+
+|  Commander Local API Sidecar (Compiled Binary)     |
+|  - Process Scanner (wmic / Win32_Process)          |
+|  - Socket Telemetry Engine (netstat -ano)          |
+|  - Process Tree Manager (taskkill / spawn)         |
+|  - Persistent Preferences (%APPDATA%)              |
++----------------------------------------------------+
+                         |
+           Windows Kernel / OS APIs
+                         v
+[ Redis ]  [ PostgreSQL ]  [ Vite ]  [ Custom Daemons ]</div>
+        </div>
+
+        <div class="arch-box">
+          <div class="arch-title">Security &amp; Operational Boundaries</div>
+          <ul class="arch-list">
+            <li><strong>Strict Local Binding:</strong> The internal companion API binds exclusively to the loopback interface (<code>127.0.0.1:4174</code>). It does not listen on <code>0.0.0.0</code> and cannot be accessed over local area networks.</li>
+            <li><strong>No Elevation Requirement:</strong> Standard process inspection and discovery operate entirely under normal user privileges without requiring UAC administrator prompts.</li>
+            <li><strong>Zero Cloud Connectivity:</strong> No analytics, crash reporting, telemetry, or external API calls are dispatched. Complete functionality is maintained in air-gapped environments.</li>
+            <li><strong>Tree Termination:</strong> Stopping managed services utilizes Windows <code>taskkill.exe /PID &lt;pid&gt; /T /F</code> to ensure all spawned child worker threads are terminated cleanly without leaving orphaned processes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DOWNLOADS SECTION ── -->
+  <section class="download-section" id="downloads">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker">Distributions</div>
+        <div class="section-title">Official Windows Release Assets</div>
+        <div class="section-desc">Download standalone installation packages for 64-bit Windows operating systems.</div>
+      </div>
+
+      <div class="dl-table-wrapper">
+        <table class="specs-table">
+          <thead>
+            <tr>
+              <th>PACKAGE TYPE</th>
+              <th>TARGET ARCHITECTURE</th>
+              <th>FILE NAME</th>
+              <th>ESTIMATED SIZE</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>NSIS Setup (Recommended)</strong></td>
+              <td>Windows 10 / 11 (x64)</td>
+              <td><code>Local.Service.Commander_0.1.0_x64-setup.exe</code></td>
+              <td>Installer</td>
+              <td><a href="https://github.com/trishitkb/Local-Service-Commander-App/releases/download/v0.1.0/Local.Service.Commander_0.1.0_x64-setup.exe" class="btn-dl-table">Download .exe</a></td>
+            </tr>
+            <tr>
+              <td><strong>MSI Package</strong></td>
+              <td>Windows Enterprise / GPO (x64)</td>
+              <td><code>Local.Service.Commander_0.1.0_x64_en-US.msi</code></td>
+              <td>MSI Installer</td>
+              <td><a href="https://github.com/trishitkb/Local-Service-Commander-App/releases/download/v0.1.0/Local.Service.Commander_0.1.0_x64_en-US.msi" class="btn-dl-table">Download .msi</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top: 16px; font-size: 12px; color: var(--text-muted); font-family: var(--font-mono);">
+        Verify installer integrity via PowerShell: <br />
+        <code style="background: #ffffff; padding: 3px 6px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); display: inline-block; margin-top: 4px;">
+          Get-FileHash -Algorithm SHA256 ".\Local.Service.Commander_0.1.0_x64-setup.exe"
+        </code>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <img src="favicon.svg" alt="" width="16" height="16" style="vertical-align: -3px; margin-right: 6px; border-radius: 3px;" />
+        <strong>Local Service Commander</strong> &mdash; Official Documentation and Distribution Repository.
+      </div>
+      <ul class="footer-links">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#downloads">Downloads</a></li>
+        <li><a href="https://buymeacoffee.com/trishitkb" target="_blank" rel="noopener noreferrer" style="color: #b45309; font-weight: 600;">☕ Buy Me a Coffee</a></li>
+        <li><a href="https://github.com/trishitkb/local-service-commander-app/releases" target="_blank">Release Notes</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
